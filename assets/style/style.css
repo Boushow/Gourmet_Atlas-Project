@@ -4,11 +4,25 @@
     box-sizing: border-box;
 }
 
-#map { 
-    height: 100vh;
+:root {
+    --avocado:#5C8001;
+    --citrine :#F3DE2C;
+    --orange : #FB6107;
+    --apple : #7CB518;
+
 }
 
-/* #plat{
-    width: 50%;
-    height: 50%;
-} */
+@font-face {
+    font-family: 'Handelson';
+    src: url('../fonts/FontsFree-Net-Handelson.ttf');
+}
+
+header {
+    background-color: var(--avocado);
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 7rem;
+}
