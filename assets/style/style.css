@@ -1,28 +1,72 @@
+/* Commun */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 :root {
-    --avocado:#5C8001;
-    --citrine :#F3DE2C;
-    --orange : #FB6107;
-    --apple : #7CB518;
-
+  --avocado: #5c8001;
+  --citrine: #f3de2c;
+  --orange: #fb6107;
+  --apple: #7cb518;
 }
 
-@font-face {
-    font-family: 'Handelson';
-    src: url('../fonts/FontsFree-Net-Handelson.ttf');
-}
-
+/* Header */
 header {
-    background-color: var(--avocado);
-    display: flex;
-    align-items: center;
+  height: 100px;
+  background-color: var(--avocado);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logo {
-    width: 7rem;
+#logo {
+  width: 6.2rem;
+}
+
+#img-logo {
+  width: 100%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding-left: 20px;
+  display: flex;
+  gap: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  
+}
+
+nav ul :hover {
+  background-color: aliceblue;
+  transition-duration: 0.2s;
+  
+}
+
+nav li {
+  padding: 10px;
+
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Map */
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 5px;
+}
+
+#map {
+  width: 100%;
+  height: 100vh;
 }
