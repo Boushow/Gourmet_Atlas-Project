@@ -6,6 +6,11 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@font-face {
+  font-family: 'Handelson';
+  src: url('../fonts/FontsFree-Net-Handelson.ttf');
+}
+
 :root {
   --avocado: #5c8001;
   --citrine: #f3de2c;
@@ -20,7 +25,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4rem;
+  padding: 0 1.5rem;
 }
 
 .logo {
@@ -28,6 +33,7 @@ header {
   display: flex;
   align-items: center;
 }
+
 
 nav ul {
   list-style-type: none;
@@ -49,9 +55,18 @@ nav li {
 
 }
 
+
+
 nav a {
   text-decoration: none;
   color: black;
+}
+
+main {
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Map */
@@ -65,6 +80,47 @@ nav a {
 }
 
 #map {
+  height: 34rem;
   width: 100%;
-  height: 100vh;
+}
+
+.map-content {
+  width: 60%;
+}
+.plats-listes {
+  width: 35%;
+  margin-top: 3rem;
+  border: var(--apple) 2px solid;
+  border-radius: 2rem;
+  padding-bottom: .8rem;
+}
+
+.plats-listes h4 {
+  text-align: center;
+  background-color: var(--orange);
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  padding: .5rem 0;
+}
+
+.liste-resultat {
+  padding: .3rem;
+  display: flex;
+  align-items: center;
+}
+
+.plat {
+  width: 85%;
+}
+
+.plat-title {
+  font-size: 1.4rem;
+}
+.note {
+  width: 15%;
+}
+
+.rate {
+  text-align: center;
+  font-size: 3rem;
 }
