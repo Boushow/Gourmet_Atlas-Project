@@ -19,15 +19,14 @@ header {
   background-color: var(--avocado);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 4rem;
 }
 
-#logo {
+.logo {
   width: 6.2rem;
-}
-
-#img-logo {
-  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 nav ul {
@@ -41,9 +40,8 @@ nav ul {
 }
 
 nav ul :hover {
-  background-color: aliceblue;
+  background-color: var(--citrine);
   transition-duration: 0.2s;
-  
 }
 
 nav li {
