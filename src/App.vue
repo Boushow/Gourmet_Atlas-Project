@@ -7,50 +7,74 @@ import L from 'leaflet';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      meals: [] 
+    };
+  },
   mounted() {
     this.initMap();
-    this.fetchDishes();
+    this.fetchPastaMeals();
   },
   methods: {
     initMap() {
-      this.map = L.map('map').setView([0, 0], 2); // Position initiale de la carte
+      this.map = L.map('map').setView([0, 0], 2);
 
-      // Ajout du fond de carte Jawg.light
       L.tileLayer('https://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.jawg.io/">Jawg</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         maxZoom: 18,
-        accessToken: 'MsXnKTMtfJ4dhKXBU3PqU8FerMf6QB2aMA5Aidw6tLH85H2044dD1FoAtOLlhYey' // Remplacez par votre propre jeton d'accès Jawg
+        accessToken: 'MsXnKTMtfJ4dhKXBU3PqU8FerMf6QB2aMA5Aidw6tLH85H2044dD1FoAtOLlhYey'
       }).addTo(this.map);
     },
-    async fetchDishes() {
+    async fetchPastaMeals() {
       try {
-        // Faites une requête à l'API pour récupérer les données des plats
-        const response = await fetch('/api/photos'); // Utilisez le chemin relatif avec le proxy configuré
-        const dishes = await response.json(); // Convertir la réponse en JSON
-
-        // Placez les marqueurs sur la carte pour chaque plat
-        dishes.forEach(dish => {
-          if (dish.location) {
-            const name = dish.name;
-            const image = dish.image;
-            const location = [dish.location.latitude, dish.location.longitude];
-
-            const markerIcon = L.icon({
-              iconUrl: image,
-              iconSize: [40, 40],
-              iconAnchor: [20, 40],
-              popupAnchor: [0, -40]
-            });
-
-            L.marker(location, { icon: markerIcon })
-              .addTo(this.map)
-              .bindPopup(`<b>${name}</b><br><img src="${image}" alt="${name}" style="max-width: 100px;">`);
-          }
-        });
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Pasta');
+        const mealsData = await response.json();
+        this.meals = mealsData.meals;
+        this.displayMeals();
       } catch (error) {
-        console.error('Error fetching dishes:', error);
+        console.error('Error fetching pasta meals:', error);
       }
+    },
+    async displayMeals() {
+      for (const meal of this.meals) {
+        const mealName = meal.strMeal;
+        const mealImage = meal.strMealThumb;
+        const mealCountry = meal.strArea; 
+        
+        const countryCoordinates = await this.fetchCountryCoordinates(mealCountry);
+        const mealLocation = [countryCoordinates.latlng[0], countryCoordinates.latlng[1]];
+
+        const markerIcon = L.icon({
+          iconUrl: mealImage,
+          iconSize: [40, 40],
+          iconAnchor: [20, 40],
+          popupAnchor: [0, -40]
+        });
+
+        L.marker(mealLocation, { icon: markerIcon })
+          .addTo(this.map)
+          .bindPopup(`<b>${mealName}</b><br><img src="${mealImage}" alt="${mealName}" style="max-width: 100px;">`);
+      }
+    },
+    async fetchCountryCoordinates(countryName) {
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${countryName}&limit=1&countrycodes=${countryName}`);
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+      const { lat, lon } = data[0];
+      return { latlng: [lat, lon] };
+    } else {
+      throw new Error('Country coordinates not found or invalid response');
     }
+  } catch (error) {
+    console.error('Error fetching country coordinates:', error);
+    return { latlng: [0, 0] };
+  }
+}
+
+
   }
 };
 </script>
