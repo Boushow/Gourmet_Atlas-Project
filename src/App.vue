@@ -1,4 +1,7 @@
 <template>
+  <header>
+    <img src="../public/logo.png" alt="" class="logo">
+  </header>
   <div id="map"></div>
 </template>
 
@@ -86,7 +89,16 @@ export default {
           L.marker(mealLocation, { icon: markerIcon })
             .addTo(this.map)
             .bindPopup(
-              `<b>${mealName}</b><br><img src="${mealImage}" alt="${mealName}" style="max-width: 100px;">`
+              `<div class="meal-details">
+              <img class="meal-image" src="${mealImage}" alt="${mealName}">
+              <div>
+                <p class ="meal-name">${mealName}</p>
+                <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac dapus. Sed at nisl viverra, interdum.</p>
+              </div>
+              
+            </div>
+              `
             );
         }
       }
